@@ -27,11 +27,12 @@ async function run() {
     const orderCollection = database.collection("Orders");
     const usersCollection = database.collection("Users");
     const reviewCollection = database.collection("UserReview");
+
     //get api for get data  in my backend database
     app.get("/products", async (req, res) => {
       const cursor = productCollection.find({});
       const products = await cursor.toArray();
-      res.send(products);
+      res.json(products);
     });
 
     //insert product
@@ -61,7 +62,7 @@ async function run() {
       const cursor = orderCollection.find(query);
       const allOrders = await cursor.toArray();
 
-      res.send(allOrders);
+      res.json(allOrders);
     });
 
     //get api for all orders
@@ -72,7 +73,7 @@ async function run() {
       const cursor = orderCollection.find(query);
       const allOrders = await cursor.toArray();
 
-      res.send(allOrders);
+      res.json(allOrders);
     });
 
     app.delete("/allorders/:id", async (req, res) => {
@@ -112,7 +113,7 @@ async function run() {
         isAdmin = true;
       }
       //console.log(services);
-      res.send({ admin: isAdmin });
+      res.json({ admin: isAdmin });
     });
 
     //sytem use update or add
@@ -156,7 +157,7 @@ async function run() {
       const cursor = reviewCollection.find(query);
       const allReview = await cursor.toArray();
       //console.log(services);
-      res.send(allReview);
+      res.json(allReview);
     });
   } finally {
     // await client.close();
